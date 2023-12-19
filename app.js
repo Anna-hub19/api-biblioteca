@@ -3,49 +3,17 @@ import conectaNaDatabase from "./dbConect.js";
 import routes from "./routes/index.js";
 
 const conexao = await conectaNaDatabase();
+
 conexao.on("error", (erro) => {
   console.error("erro de conexão", erro);
 });
 
 conexao.once("open", () => {
-    console.log("Conexão com o banco feita com sucesso");
+  console.log("Conexao com o banco feita com sucesso");
 })
 
 const app = express();
-
-const livros = [
-  {
-    id: 1,
-    titulo: "O Senhor dos Anéis"
-  },
-  {
-    id: 2,
-    titulo: "O Hobbit"
-  }
-]
-
-function buscaLivro(id) {
-  return livros.findIndex(livro => {
-    return livro.id === Number(id);
-  })
-}
-
-
-app.get("/livros/:id", (req, res) => {
-  const index = buscaLivro(req.params.id);
-  res.status(200).json(livros[index]);
-})
-
-app.post("/livros", (req, res) => {
-  livros.push(req.body);
-  res.status(201).send("livro cadastrado com sucesso");
-});
-
-app.put("/livros/:id", (req, res) => {
-  const index = buscaLivro(req.params.id);
-  livros[index].titulo = req.body.titulo;
-  res.status(200).json(livros);
-});
+routes(app);
 
 app.delete("/livros/:id", (req, res) => {
   const index = buscaLivro(req.params.id);
@@ -54,5 +22,3 @@ app.delete("/livros/:id", (req, res) => {
 });
 
 export default app;
-
-

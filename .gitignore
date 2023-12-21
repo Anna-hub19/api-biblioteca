@@ -1,2 +1,3 @@
 node_modules
-dbConect.js
+.env
+.vscode

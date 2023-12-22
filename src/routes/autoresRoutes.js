@@ -1,5 +1,5 @@
 import express from "express";
-import AutorController from "../src/controller/AutorController.js";
+import AutorController from "../controller/AutorController.js";
 
 const routes = express.Router();
 

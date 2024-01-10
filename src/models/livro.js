@@ -16,7 +16,11 @@ const livroSchema = new mongoose.Schema(
             type: String,
             required: [true, "A editora é obrigatória"]
         },
-        numeroPaginas: { type: Number }
+        numeroPaginas: { 
+            type: Number,
+            min:[10, "o numero de paginas esta menor do que o permitido"],
+            max:[5000, "o numero de paginas esta maior do que o permitido"]
+        }
     }
 );
 
